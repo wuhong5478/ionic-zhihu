@@ -1,17 +1,16 @@
 angular.module('starter.controllers', [])
 
 .controller('IndexCtrl', function($scope, $http,$timeout) {
-
-
+    //初始化数据
     $http({
         method: 'GET',
-        url: 'http://localhost:3000/api/latestnews'
+        url: 'http://zhihu.bood.in/readapi?uri=http://news-at.zhihu.com/api/4/news/latest'
     }).then(function successCallback(response) {
-         var data = response.data.data;
+         var data = response.data;
          console.log(data)
+         $scope.today = data.date;
          $scope.topStories = data.top_stories;
-         $scope.stories = data.stories;
-
+         $scope.stories = data.stories
          //swiper 插件这里需要页面上元素渲染出来后才能初始化
          $timeout(function(){
             var swiper = new Swiper('.swiper-container', {
@@ -24,8 +23,32 @@ angular.module('starter.controllers', [])
     }, function errorCallback(response) {
         // 请求失败执行代码
     });
-})
 
+    //ion-infinite-scrol 方法页面刚加载就会执行，用isFirstPage来控制进来时使其不执行。
+    var isFirstPage = 0;
+    $scope.loadMore = function(){
+        isFirstPage++;
+        if(isFirstPage<=1){
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+            return; 
+        }   
+        $http({
+            method: 'GET',
+            url: 'http://zhihu.bood.in/readapi?uri=http://news.at.zhihu.com/api/4/news/before/20170316'
+        }).then(function successCallback(response) {
+             var data = response.data;
+             console.log(data)
+             $scope.stories = $scope.stories.concat(data.stories);
+             $scope.$broadcast('scroll.infiniteScrollComplete');
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+        });
+    }
+
+})
+.controller('IndexStoryCtrl',function($scope){
+    
+})
 .controller('ChatsCtrl', function($scope, Chats) {
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.

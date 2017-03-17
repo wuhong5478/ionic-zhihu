@@ -1,6 +1,7 @@
 
 <ion-view>
   <ion-content>
+  	
   	<div class="swiper-container" style="height: 240px;">
         <div class="swiper-wrapper">
             <div class="swiper-slide" ng-repeat="topStory in topStories">
@@ -9,5 +10,15 @@
         </div>
         <div class="swiper-pagination"></div>
     </div>
+    <div class="list">
+        <a class="item item-thumbnail-left" ng-repeat="story in stories" href='#/tab/index/123'>
+          <img src="{{story.images[0]|imgSrc}}">
+          <h2>{{story.title}}</h2>
+        </a>
+    </div>
+	<ion-infinite-scroll
+	  on-infinite="loadMore()"
+	  distance="1%">
+	</ion-infinite-scroll>
   </ion-content>
 </ion-view>
