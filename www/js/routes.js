@@ -8,53 +8,35 @@ angular.module('starter.routes', [])
             templateUrl: 'templates/tabs.html'
         })
 
+    //首页模块    
     .state('tab.index', {
-        url: '/index',
-        views: {
-            'tab-index': {
-                templateUrl: 'templates/tab-index.html',
-                controller: 'IndexCtrl'
-            }
-        }
-    })
-    .state('tab.index-story', {
-        url: '/index/:storyId',
-        views: {
-            'tab-index': {
-                templateUrl: 'templates/tab-index-story.html',
-                controller: 'IndexStoryCtrl'
-            }
-        }
-    })
-
-    .state('tab.chats', {
-            url: '/chats',
+            url: '/index',
             views: {
-                'tab-chats': {
-                    templateUrl: 'templates/tab-chats.html',
-                    controller: 'ChatsCtrl'
+                'tab-index': {
+                    templateUrl: 'templates/tab-index.html',
+                    controller: 'indexCtrl'
                 }
             }
         })
-        .state('tab.chat-detail', {
-            url: '/chats/:chatId',
+        .state('tab.index-story', {
+            url: '/index/:storyId',
             views: {
-                'tab-chats': {
-                    templateUrl: 'templates/chat-detail.html',
-                    controller: 'ChatDetailCtrl'
+                'tab-index': {
+                    templateUrl: 'templates/tab-index-story.html',
+                    controller: 'indexStoryCtrl'
                 }
             }
         })
-
-    .state('tab.account', {
-        url: '/account',
-        views: {
-            'tab-account': {
-                templateUrl: 'templates/tab-account.html',
-                controller: 'AccountCtrl'
+    //主题日报模块
+    .state('tab.theme', {
+            url: '/theme',
+            views: {
+                'tab-theme': {
+                    templateUrl: 'templates/tab-theme.html',
+                    controller: 'themeCtrl'
+                }
             }
-        }
-    });
+        })
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/index');

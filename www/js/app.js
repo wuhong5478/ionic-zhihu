@@ -4,7 +4,8 @@ angular.module('starter', [
     'starter.routes',
     'starter.services',
     'starter.filters',
-    'starter.indexCtrl'
+    'starter.indexCtrl',
+    'starter.themeCtrl'
     ])
 
 .run(function($ionicPlatform) {

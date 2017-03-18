@@ -1,6 +1,6 @@
 angular.module('starter.indexCtrl', [])
 
-.controller('IndexCtrl', function($scope, $http,$timeout) {
+.controller('indexCtrl', function($scope, $http,$timeout) {
     //初始化数据
     $http({
         method: 'GET',
@@ -46,7 +46,7 @@ angular.module('starter.indexCtrl', [])
     }
 
 })
-.controller('IndexStoryCtrl',function($scope,$http,$state){
+.controller('indexStoryCtrl',function($scope,$http,$state){
     var storyId = $state.params.storyId;
     $http({
         method: 'GET',

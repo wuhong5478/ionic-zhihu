@@ -1,0 +1,15 @@
+<ion-view>
+  <ion-content class="padding">
+    <div class="list card">
+      <div class="item item-body" ng-repeat="theme in themesData">
+        <img class="full-image" src="{{theme.thumbnail|imgSrc}}">
+        <p>
+          {{theme.name}}
+        </p>
+        <p>
+           {{theme.description}}
+        </p>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
