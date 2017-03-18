@@ -18,7 +18,7 @@ angular.module('starter.routes', [])
         }
     })
     .state('tab.index-story', {
-        url: '/index/123',
+        url: '/index/:storyId',
         views: {
             'tab-index': {
                 templateUrl: 'templates/tab-index-story.html',
@@ -57,6 +57,6 @@ angular.module('starter.routes', [])
     });
 
     // if none of the above states are matched, use this as the fallback
-   // $urlRouterProvider.otherwise('/tab/index');
+    $urlRouterProvider.otherwise('/tab/index');
 
 });

@@ -11,7 +11,7 @@
         <div class="swiper-pagination"></div>
     </div>
     <div class="list">
-        <a class="item item-thumbnail-left" ng-repeat="story in stories" href='#/tab/index/123'>
+        <a class="item item-thumbnail-left" ng-repeat="story in stories" href='#/tab/index/{{story.id}}'>
           <img src="{{story.images[0]|imgSrc}}">
           <h2>{{story.title}}</h2>
         </a>

@@ -1,5 +1,11 @@
 
-angular.module('starter', ['ionic','starter.routes', 'starter.controllers', 'starter.services','starter.filters'])
+angular.module('starter', [
+    'ionic',
+    'starter.routes',
+    'starter.services',
+    'starter.filters',
+    'starter.indexCtrl'
+    ])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
