@@ -1,7 +1,12 @@
 /* Empty. Add your own CSS if you like */
 
+//返回按钮
+.button{width:30px!important;border: none;}
+
+
 .swiper-container{height: 240px;}
 .swiper-container img{display: block;width:100%;height: 100%;}
+.swiper-container p{position: absolute;left:0px;bottom: 20px;width: 100%;text-align: center;color: #fff;}
 
 .headline .img-place-holder{height:auto!important;}
 .img-place-holder img{display: block;width:100%;height:auto;}

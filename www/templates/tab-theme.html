@@ -1,15 +1,36 @@
+<style type="text/css">
+  .themecard{
+    box-shadow: none;
+    margin: 0px;
+  }
+  .themeitem{
+    padding: 0px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 2px 0 #bdbdbd;
+  }
+  .themeitem .imgbox{
+    height: 180px;
+    background-size:cover; 
+  }
+  .themeitem h3{
+    width:90%;
+    margin: 10px auto; 
+  }
+</style>
 <ion-view>
   <ion-content class="padding">
-    <div class="list card">
-      <div class="item item-body" ng-repeat="theme in themesData">
-        <img class="full-image" src="{{theme.thumbnail|imgSrc}}">
-        <p>
+    <div class="list themecard">
+      <a class="item item-body  themeitem" ng-repeat="theme in themesData" href="#/tab/theme/{{theme.id}}">
+        <div class="imgbox" style="background-image: url('{{theme.thumbnail|imgSrc}}'); ">
+        </div>
+        <h3>
           {{theme.name}}
-        </p>
-        <p>
+        </h3>
+        <p style="width: 90%;margin:0 auto!important;">
            {{theme.description}}
         </p>
-      </div>
+      </a>
     </div>
   </ion-content>
 </ion-view>

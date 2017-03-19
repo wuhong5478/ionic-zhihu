@@ -46,28 +46,43 @@ angular.module('starter.indexCtrl', [])
     }
 
 })
-.controller('indexStoryCtrl',function($scope,$http,$state){
+.controller('indexStoryCtrl',function($scope,$http,$state,$timeout){
     var storyId = $state.params.storyId;
-    $http({
-        method: 'GET',
-        url: 'http://zhihu.bood.in/readapi?uri=http://news-at.zhihu.com/api/4/news/'+storyId
-    }).then(function successCallback(response) {
-        var data = response.data;
-        console.log(data) 
-        $scope.cssLink = data.css[0];
+    
+    //为保证页面流畅度，进入页面300毫秒后再请求数据
+    $timeout(function(){
+        $http({
+            method: 'GET',
+            url: 'http://zhihu.bood.in/readapi?uri=http://news-at.zhihu.com/api/4/news/'+storyId
+        }).then(function successCallback(response) {
+            var data = response.data;
+            $scope.cssLink = data.css[0];
+            $scope.title = data.title;
+            //处理接口返回的html字符串，在指定位置插入字符串
+            var inserHtml,arrHtml,oldHtml;
+            if(data.image){
+                inserHtml = '<img src="'+data.image+'">';
+                arrHtml = data.body.split('<div class="img-place-holder">');
+                oldHtml = arrHtml[0]+'<div class="img-place-holder">'+inserHtml+arrHtml[1];
+            }else{
+                oldHtml = data.body;
+            } 
+            
+            //知乎图片防盗链，图片链接正则替换用别人的
+            var newHtml= oldHtml.replace(/src=[\'\"]?([^\'\"]*)[\'\"]?/gi, function (img, imgUrl) {
+                return 'src=http://zhihu.garychang.cn/tiny-pic?img='+imgUrl;
+            });
 
-        //处理接口返回的html字符串，在指定位置插入字符串
-        var inserHtml = '<img src="'+data.image+'">';
-        var arrHtml = data.body.split('<div class="img-place-holder">');
-        var oldHtml = arrHtml[0]+'<div class="img-place-holder">'+inserHtml+arrHtml[1];
-        //知乎图片防盗链，图片链接正则替换用别人的
-        var newHtml= oldHtml.replace(/src=[\'\"]?([^\'\"]*)[\'\"]?/gi, function (img, imgUrl) {
-            return 'src=http://zhihu.garychang.cn/tiny-pic?img='+imgUrl;
+            $timeout(function(){
+               $scope.content = newHtml; 
+            },100)
+            
+
+        }, function errorCallback(response) {
+            // 请求失败执行代码
         });
-        $scope.content = newHtml;
 
-    }, function errorCallback(response) {
-        // 请求失败执行代码
-    });
+    },300)
+    
 
 })

@@ -1,0 +1,21 @@
+<style type="text/css">
+	.themelist{
+		width: 95%;
+		margin:8px auto;
+	}
+	.themelist h2{
+		white-space:normal;
+		line-height: 22px;
+	}
+</style>
+<ion-view hide-tabs>
+  <button-goback title=title></button-goback>	
+  <ion-content class="has-header">
+    <div class="list" style="background: #f3f3f3;">
+        <a ng-class={'item':true,'themelist':true,'item-thumbnail-left':!!story.images} ng-repeat="story in stories" href="#/tab/theme/{{listId}}/{{story.id}}">
+          <img ng-if="story.images" src="{{story.images[0]|imgSrc}}">
+          <h2>{{story.title}}</h2>
+        </a>
+    </div>
+  </ion-content>
+</ion-view>
