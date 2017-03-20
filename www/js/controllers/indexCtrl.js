@@ -22,19 +22,22 @@ angular.module('starter.indexCtrl', [])
          
     }, function errorCallback(response) {
         // 请求失败执行代码
-    });
+    });  
 
     //ion-infinite-scrol 方法页面刚加载就会执行，用isFirstPage来控制进来时使其不执行。
     var isFirstPage = 0;
     $scope.loadMore = function(){
+        console.log(isFirstPage)
         isFirstPage++;
-        if(isFirstPage<=1){
+        console.log(isFirstPage)
+        if(isFirstPage<=2){
             $scope.$broadcast('scroll.infiniteScrollComplete');
             return; 
         }   
+        console.log(isFirstPage)
         $http({
             method: 'GET',
-            url: 'http://zhihu.bood.in/readapi?uri=http://news.at.zhihu.com/api/4/news/before/20170316'
+            url: 'http://zhihu.bood.in/readapi?uri=http://news.at.zhihu.com/api/4/news/before/'+(--$scope.today)
         }).then(function successCallback(response) {
              var data = response.data;
              console.log(data)

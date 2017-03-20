@@ -10,7 +10,7 @@ angular.module('starter.directives', [])
                  '   <h1 class="title">{{title}}</h1>'+
                  '</div>',
         link: function(scope, element, attrs) {
-            $(element).click(function(){
+            $(element).find('button').click(function(){
                 window.history.go(-1);
             })
         }
